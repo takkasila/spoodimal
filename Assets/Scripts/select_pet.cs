@@ -10,35 +10,35 @@ public class select_pet : MonoBehaviour {
 	void Start () {
 		UID = PlayerPrefs.GetString("UID");
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	public void clickDog(){
 		PID = "1";
-		disableButton ();
-		StartCoroutine(goPlay());
+		afterClickButton();
 	}
 
 	public void clickCat(){
 		PID = "2";
-		disableButton ();
-		StartCoroutine(goPlay());
+		afterClickButton();
 	}
 
-	void disableButton(){
+	void afterClickButton(){
 		buttonDog.enabled = false;
 		buttonCat.enabled = false;
+		StartCoroutine(goPlay());
 	}
 
 	IEnumerator goPlay(){
 		StartCoroutine(insertPlayer());
 		while (!www.isDone) {
-			yield return new WaitForSeconds(0.1f);
-			StopCoroutine(insertPlayer());
+
 		}
+		yield return new WaitForSeconds(0.1f);
+		StopCoroutine(insertPlayer());
 		PlayerPrefs.SetString("UID", UID);
 		Application.LoadLevel ("play");
 	}
