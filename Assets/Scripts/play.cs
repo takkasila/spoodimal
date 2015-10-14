@@ -89,5 +89,6 @@ public class play : MonoBehaviour {
 		form.AddField("PET_FOOD", PET_FOOD.ToString());
 		www3 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryUpdatePetData.php",form);
 		yield return www3;
+
 	}
 }
