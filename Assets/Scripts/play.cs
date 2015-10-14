@@ -37,8 +37,9 @@ public class play : MonoBehaviour {
 			PET_NAME_Old = PET_NAME;
 			StartCoroutine (updatePetData ());
 			while(!www3.isDone){
-				StopCoroutine(updatePetData());
+
 			}
+			StopCoroutine(updatePetData());
 		}
 	}
 

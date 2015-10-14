@@ -19,18 +19,20 @@ public class login : MonoBehaviour {
 
 	IEnumerator goPlay(){
 		while (!www.isDone) {
-			yield return new WaitForSeconds(0.1f);
-			StopCoroutine(checkLogin());
+
 		}
+		yield return new WaitForSeconds(0.1f);
+		StopCoroutine(checkLogin());
 		if (loginSuccess) {
 			StartCoroutine(checkSelectPet());
 			while(!www2.isDone){
-				yield return new WaitForSeconds(0.1f);
-				StopCoroutine(checkSelectPet());
+
 			}
+			yield return new WaitForSeconds(0.1f);
+			StopCoroutine(checkSelectPet());
 			PlayerPrefs.SetString("UID", UID);
 			if(resultCheckSelectPet){
-				Application.LoadLevel ("play");
+				Application.LoadLevel ("gameplay");
 			}
 			else{
 				Application.LoadLevel ("menu");
@@ -49,8 +51,7 @@ public class login : MonoBehaviour {
 	IEnumerator checkLogin(){
 		WWWForm form = new WWWForm();
 		form.AddField("username", username.text);
-		form.AddField("password", password.text
-);
+		form.AddField("password", password.text);
 		www = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckLogin.php",form);
 		yield return www;
 		JSONObject jsonObject = JSONObject.Parse(www.text);
@@ -62,7 +63,7 @@ public class login : MonoBehaviour {
 		}
 		else if(valueType.Equals("ERROR")){
 			msgError.text = removeDoubleQuote(jsonObject.GetValue("VALUE").ToString());
-			loginSuccess = false;	
+			loginSuccess = false;
 		}
 	}
 

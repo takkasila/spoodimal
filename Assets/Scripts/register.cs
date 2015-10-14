@@ -6,7 +6,7 @@ using System.Threading;
 public class register : MonoBehaviour {
 	public Text outputUsername;
     public InputField outputPassword,outputRePassword;
-	public Text msgUsernameError,msgPasswordError,msgRePasswordError;
+	public Text msgError;
 	private bool resultCheckUsername;
 	private string UID;
 	private WWW www,www2;
@@ -20,17 +20,19 @@ public class register : MonoBehaviour {
 
 	IEnumerator goPlay(){
 		while(!www.isDone) {
-			yield return new WaitForSeconds(0.2f);
-			printMsgError();
+
 		}
+		yield return new WaitForSeconds(0.2f);
+		printMsgError();
 		StopCoroutine(checkUsername());
-		if(msgUsernameError.text == "" && msgPasswordError.text == "" && msgRePasswordError.text == ""){
+		if(msgError.text == ""){
 			buttonRegister.enabled = false;
 			StartCoroutine(insertUser());
 			while(www.isDone && !www2.isDone){
-				yield return new WaitForSeconds(0.1f);
-				StopCoroutine(insertUser());
+
 			}
+			yield return new WaitForSeconds(0.1f);
+			StopCoroutine(insertUser());
 			PlayerPrefs.SetString("UID", UID);
 			Application.LoadLevel ("menu");
 		}
@@ -80,24 +82,20 @@ public class register : MonoBehaviour {
 	
 
 	void printMsgError(){
-		print (resultCheckUsername);
-		if(checkCount(outputUsername.text)){
-			msgUsernameError.text = (resultCheckUsername)? "":"Username Error";
+		if(!checkCount(outputUsername.text) || !checkCount(outputPassword.text) || !checkCount(outputRePassword.text)){
+			msgError.text = "Required\nLength 6 - 11 Character";
 		}
 		else{
-			msgUsernameError.text = "Length Beetween 6 and 11";
+			if(!resultCheckUsername){
+				msgError.text = "Username Not Available";
+			}
+			else if(!checkPassword()){
+				msgError.text = "Password Not Equals Re-Password";
+			}
+			else{
+				msgError.text = "";
+			}
 		}
-		if(checkCount(outputPassword.text)){
-			msgPasswordError.text = (checkPassword())? "":"Password Error";
-		}
-		else{
-			msgPasswordError.text = "Length Beetween 6 and 11";
-		}
-		if(checkCount(outputRePassword.text)){
-			msgRePasswordError.text = "";
-		}
-		else{
-			msgRePasswordError.text = "Length Beetween 6 and 11";
-		}
+		print ("This is a error ja >>>>>>>> " + msgError.text);
 	}
 }
