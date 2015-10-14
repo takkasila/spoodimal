@@ -82,8 +82,8 @@ public class register : MonoBehaviour {
 	
 
 	void printMsgError(){
-		if(!checkCount(outputUsername.text ) && !checkCount(outputPassword.text) && !checkCount(outputRePassword.text)){
-			msgError.text = "Required Length 6 - 11 Character";
+		if(!checkCount(outputUsername.text) || !checkCount(outputPassword.text) || !checkCount(outputRePassword.text)){
+			msgError.text = "Required\nLength 6 - 11 Character";
 		}
 		else{
 			if(!resultCheckUsername){
@@ -96,6 +96,6 @@ public class register : MonoBehaviour {
 				msgError.text = "";
 			}
 		}
-		print (msgError.text);
+		print ("This is a error ja >>>>>>>> " + msgError.text);
 	}
 }
