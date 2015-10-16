@@ -8,14 +8,24 @@ public class register : MonoBehaviour {
     public InputField outputPassword,outputRePassword;
 	public Text msgError;
 	private bool resultCheckUsername;
-	private string UID;
-	private WWW www,www2;
+	private string UID,URL = "http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/";
+	private WWW www,www2,www3;
 	public Button buttonRegister;
 
 	public void clickRegister (){
-		StartCoroutine(checkUsername());
-		checkPassword();
-		StartCoroutine(goPlay());
+		StartCoroutine(checkInternet());
+		while(!www3.isDone){
+			
+		}
+		if (string.IsNullOrEmpty (www3.error)) {
+			msgError.text = "";
+			StartCoroutine (checkUsername ());
+			checkPassword ();
+			StartCoroutine (goPlay ());
+		} 
+		else {
+			msgError.text = "Can't Connect Server";
+		}
 	}
 
 	IEnumerator goPlay(){
@@ -51,7 +61,7 @@ public class register : MonoBehaviour {
 		WWWForm form = new WWWForm();
 		form.AddField("username", outputUsername.text);
 		form.AddField("password", outputPassword.text);
-		www2 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryInsertUser.php",form);
+		www2 = new WWW(URL+"queryInsertUser.php",form);
 		yield return www2;
 		UID = www2.text;
 		Debug.Log("INSERT");
@@ -69,7 +79,7 @@ public class register : MonoBehaviour {
 	IEnumerator checkUsername(){
 		WWWForm form = new WWWForm();
 		form.AddField("username", outputUsername.text);
-		www = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckUsername.php",form);
+		www = new WWW(URL+"queryCheckUsername.php",form);
 		yield return www;
 		if(www.text == "not_available"){
 			resultCheckUsername = false;
@@ -97,5 +107,15 @@ public class register : MonoBehaviour {
 			}
 		}
 		print ("This is a error ja >>>>>>>> " + msgError.text);
+	}
+
+	public void clickBack(){
+		Application.LoadLevel ("login");
+	}
+
+	IEnumerator checkInternet(){
+		www3 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckSelectPet.php");
+		yield return www3;
+		print (www3.error);
 	}
 }

@@ -7,14 +7,25 @@ using Boomlagoon.JSON;
 public class login : MonoBehaviour {
 	public Text username,msgError;
     public InputField password;
-	private string UID;
+	private string UID,URL = "http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/";
 	private bool loginSuccess = false,resultCheckSelectPet = false;
-	private WWW www,www2;
+	private WWW www,www2,www3;
 
 	public void clickPlay (){
-		StopCoroutine(goPlay());
-		StartCoroutine(checkLogin());
-		StartCoroutine(goPlay());
+		StartCoroutine(checkInternet());
+		while(!www3.isDone){
+
+		}
+		if (string.IsNullOrEmpty(www3.error)) {
+			msgError.text = "";
+			StopCoroutine (checkInternet ());
+			StopCoroutine (goPlay ());
+			StartCoroutine (checkLogin ());
+			StartCoroutine (goPlay ());
+		}
+		else {
+			msgError.text = "Can't Connect Server";
+		}
 	}
 
 	IEnumerator goPlay(){
@@ -52,7 +63,7 @@ public class login : MonoBehaviour {
 		WWWForm form = new WWWForm();
 		form.AddField("username", username.text);
 		form.AddField("password", password.text);
-		www = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckLogin.php",form);
+		www = new WWW(URL+"queryCheckLogin.php",form);
 		yield return www;
 		JSONObject jsonObject = JSONObject.Parse(www.text);
 		string valueType = removeDoubleQuote(jsonObject.GetValue ("TYPE").ToString());
@@ -70,7 +81,7 @@ public class login : MonoBehaviour {
 	IEnumerator checkSelectPet(){
 		WWWForm form = new WWWForm();
 		form.AddField("UID", UID);
-		www2 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckSelectPet.php",form);
+		www2 = new WWW(URL+"queryCheckSelectPet.php",form);
 		yield return www2;
 		string result = removeDoubleQuote(www2.text);
 		if(result.Equals("not_selected")){
@@ -81,5 +92,11 @@ public class login : MonoBehaviour {
 		}
 		Debug.Log(www2.text);
 		print (resultCheckSelectPet);
+	}
+
+	IEnumerator checkInternet(){
+		www3 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckSelectPet.php");
+		yield return www3;
+		print (www3.error);
 	}
 }
