@@ -22,7 +22,7 @@ public class Scrolling : MonoBehaviour {
     void Update()
     {
         scrolling();
-        Debug.Log(totalSlideDist);
+        //Debug.Log(totalSlideDist);
         updateSpeedNPosition();
     }
 
