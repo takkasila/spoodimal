@@ -59,7 +59,7 @@ public class select_pet : MonoBehaviour {
 	}
 
 	IEnumerator checkInternet(){
-		www2 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckSelectPet.php");
+		www2 = new WWW("https://www.google.co.th");
 		yield return www2;
 		print (www2.error);
 	}

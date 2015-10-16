@@ -114,7 +114,7 @@ public class register : MonoBehaviour {
 	}
 
 	IEnumerator checkInternet(){
-		www3 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckSelectPet.php");
+		www3 = new WWW("https://www.google.co.th");
 		yield return www3;
 		print (www3.error);
 	}
