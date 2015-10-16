@@ -4,7 +4,9 @@ using System.Collections;
 public class Scrolling : MonoBehaviour {
 
     public float scrollLunchSpeed = 0.8f, frictionAcc = 1f;
+    public float maxSlide;
 
+    float totalSlideDist = 0;
     float currentSpeed;
     float objectLastXPosition;
     Vector3 mouseLastXPosition;
@@ -20,6 +22,7 @@ public class Scrolling : MonoBehaviour {
     void Update()
     {
         scrolling();
+        Debug.Log(totalSlideDist);
         updateSpeedNPosition();
     }
 
@@ -29,11 +32,27 @@ public class Scrolling : MonoBehaviour {
         {
             float deltaMouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x 
                 - Camera.main.ScreenToWorldPoint(mouseLastXPosition).x;
+            if(totalSlideDist + deltaMouseX > maxSlide)
+            {
+                deltaMouseX = maxSlide - totalSlideDist;
+                totalSlideDist = maxSlide;
+            }
+            else if (totalSlideDist + deltaMouseX < -maxSlide)
+            {
+                deltaMouseX = -maxSlide - totalSlideDist;
+                totalSlideDist = -maxSlide;
+            }
+            else
+            {
+                totalSlideDist += deltaMouseX;
+            }
+
             foreach(Transform child in transform)
             {
                 child.position = new Vector3(child.position.x + deltaMouseX, child.position.y, child.position.z);
             }
         }
+        // lunch velocity
         else if(lastHoldingFrame)
         {
             if ((Input.mousePosition.x - mouseLastXPosition.x) > 0)
@@ -58,11 +77,32 @@ public class Scrolling : MonoBehaviour {
     {
         if(!holding)
         {
+            // TODO
+            //bool speedTooMuch = false;
+            //if(totalSlideDist + currentSpeed > maxSlide)
+            //{
+            //    currentSpeed = maxSlide - totalSlideDist;
+            //    totalSlideDist = maxSlide;
+            //    speedTooMuch = true;
+            //}
+            //else if (totalSlideDist + currentSpeed < -maxSlide)
+            //{
+            //    currentSpeed = -maxSlide - totalSlideDist;
+            //    totalSlideDist = -maxSlide;
+            //    speedTooMuch = true;
+            //}
+            //else
+            //{
+            //    totalSlideDist += currentSpeed;
+            //    speedTooMuch = false;
+            //}
+
             foreach(Transform child in transform)
             {
                 child.position = new Vector3(child.position.x + currentSpeed * Time.deltaTime, child.position.y, child.position.z);
             }
 
+            
             if (currentSpeed > 0)
             {
                 currentSpeed -= frictionAcc * Time.deltaTime;
