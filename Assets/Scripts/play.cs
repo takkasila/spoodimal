@@ -20,7 +20,6 @@ public class play : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		PET_NAME = inputPET_NAME.text;
 		if (PET_WEIGHT != PET_WEIGHT_Old || PET_FOOD != PET_FOOD_Old || PET_NAME != PET_NAME_Old) {
 			PET_WEIGHT_Old = PET_WEIGHT;
 			PET_FOOD_Old = PET_FOOD;
@@ -31,6 +30,10 @@ public class play : MonoBehaviour {
 			}
 			StopCoroutine(updatePetData());
 		}
+	}
+
+	void updatePetName(){
+		PET_NAME = inputPET_NAME.text;
 	}
 
 	string removeDoubleQuote(string str){
