@@ -5,32 +5,22 @@ using UnityEngine.UI;
 using Boomlagoon.JSON;
 
 public class play : MonoBehaviour {
-	public Text inputPET_NAME,inputPET_WEIGHT,inputPET_FOOD;
-	private string UID,PID,PET_NAME,PET_NAME_Old,START_DATE,UPDATE_DATE;
-	private double PET_WEIGHT,PET_WEIGHT_Old;
-	private int PET_FOOD,PET_FOOD_Old;
+	public Text inputPET_NAME;
+	public string UID,PID,PET_NAME,PET_NAME_Old,START_DATE,UPDATE_DATE;
+	public double PET_WEIGHT,PET_WEIGHT_Old,PET_TOTALTIME;
+	public int PET_FOOD,PET_FOOD_Old;
 	private WWW www,www2,www3;
+	
 	// Use this for initialization
 	void Start () {
-		PET_NAME = "Petname";
-		PET_WEIGHT = 0;
-		PET_FOOD = 0;
+		PET_NAME = "";
 		UID = PlayerPrefs.GetString("UID");
 		StartCoroutine (checkPetData ());
-//		showUID.text = UID;
-//		Debug.Log (UID);
-
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (inputPET_WEIGHT.text != "") {
-			PET_WEIGHT = double.Parse(inputPET_WEIGHT.text);
-		}
-		if(inputPET_FOOD.text != ""){
-			PET_FOOD = int.Parse(inputPET_FOOD.text);
-		}
-//		print (inputPET_WEIGHT.text);
+		PET_NAME = inputPET_NAME.text;
 		if (PET_WEIGHT != PET_WEIGHT_Old || PET_FOOD != PET_FOOD_Old || PET_NAME != PET_NAME_Old) {
 			PET_WEIGHT_Old = PET_WEIGHT;
 			PET_FOOD_Old = PET_FOOD;
@@ -41,10 +31,6 @@ public class play : MonoBehaviour {
 			}
 			StopCoroutine(updatePetData());
 		}
-	}
-
-	public void confirmPetName(){
-		PET_NAME = inputPET_NAME.text;
 	}
 
 	string removeDoubleQuote(string str){
@@ -65,6 +51,7 @@ public class play : MonoBehaviour {
 			PET_NAME = removeDoubleQuote(jsonData.GetValue("PET_NAME").ToString());
 			PET_WEIGHT = double.Parse(removeDoubleQuote(jsonData.GetValue("PET_WEIGHT").ToString()));
 			PET_FOOD = int.Parse(removeDoubleQuote(jsonData.GetValue("PET_FOOD").ToString()));
+			PET_TOTALTIME = double.Parse(removeDoubleQuote(jsonData.GetValue("PET_TOTALTIME").ToString()));
 			print (removeDoubleQuote(jsonData.ToString()));
 		}
 		else if (valueType.Equals ("ERROR")) {
@@ -77,7 +64,6 @@ public class play : MonoBehaviour {
 		form.AddField("UID", UID);
 		form.AddField("PET_NAME", PET_NAME);
 		form.AddField("PET_WEIGHT", PET_WEIGHT.ToString());
-		form.AddField("PET_FOOD", PET_FOOD.ToString());
 		www2 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryInsertPetData.php",form);
 		yield return www2;
 	}
@@ -88,6 +74,7 @@ public class play : MonoBehaviour {
 		form.AddField("PET_NAME", PET_NAME);
 		form.AddField("PET_WEIGHT", PET_WEIGHT.ToString());
 		form.AddField("PET_FOOD", PET_FOOD.ToString());
+		form.AddField("PET_TOTALTIME", PET_TOTALTIME.ToString());
 		www3 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryUpdatePetData.php",form);
 		yield return www3;
 
