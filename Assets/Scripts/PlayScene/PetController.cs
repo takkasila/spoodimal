@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PetController : MonoBehaviour {
+public class PetController : MonoBehaviour{
     public float pushForce = 9.8f;
     Rigidbody2D rb;
     Transform forcePoint;
@@ -16,4 +16,9 @@ public class PetController : MonoBehaviour {
 	void Update () {
         rb.AddForceAtPosition(new Vector2(Input.acceleration.x * pushForce, 0), forcePoint.position, ForceMode2D.Force);
 	}
+
+    public void gotFood(int foodValue)
+    {
+        Debug.Log(foodValue);
+    }
 }
