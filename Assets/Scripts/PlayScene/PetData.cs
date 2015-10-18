@@ -40,10 +40,10 @@ public class PetData : MonoBehaviour {
 	void Update () {
         // Automaticly sync data so data could be globally edit anytime
         petDatabase.PET_WEIGHT = petWeight;
-        text_weight_output.text = petWeight.ToString("F1");
+        text_weight_output.text = petWeight.ToString("F1") + " kg";
 
         petDatabase.PET_TOTALTIME = petTotalTime;
-        text_totalTime_output.text = ((int)petTotalTime).ToString();
+        text_totalTime_output.text = ((int)petTotalTime).ToString() + " sec";
 
         petDatabase.PET_FOOD = petFood;
 	}
