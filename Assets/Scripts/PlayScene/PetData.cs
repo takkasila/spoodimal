@@ -10,6 +10,9 @@ public class PetData : MonoBehaviour {
     public Text text_totalTime_output;
     public PlayDatabase petDatabase;
 
+    public GameObject Doge;
+    public GameObject Cate;
+
     [HideInInspector]
     public string UID, PID;
     [HideInInspector]
@@ -35,11 +38,18 @@ public class PetData : MonoBehaviour {
 	}
 
 	void Update () {
+        // Automaticly sync data so data could be globally edit anytime
+        petDatabase.PET_WEIGHT = petWeight;
+        text_weight_output.text = petWeight.ToString("F1");
+
+        petDatabase.PET_TOTALTIME = petTotalTime;
+        text_totalTime_output.text = ((int)petTotalTime).ToString();
+
+        petDatabase.PET_FOOD = petFood;
 	}
 
     void EndEditName(InputField input)
     {
-        Debug.Log("Yo it's working");
         petDatabase.PET_NAME = petName = input.text;
     }
 
@@ -47,7 +57,7 @@ public class PetData : MonoBehaviour {
     public void getDatabase()
     {
         UID = petDatabase.UID;
-        PID = petDatabase.UID;
+        PID = petDatabase.PID;
         petName = petDatabase.PET_NAME;
         startDate = petDatabase.START_DATE;
         petWeight = petDatabase.PET_WEIGHT;
@@ -57,5 +67,16 @@ public class PetData : MonoBehaviour {
         text_name.text = petName;
         text_weight_output.text = petWeight.ToString("F1");
         text_totalTime_output.text = ((int)petTotalTime).ToString();
+
+        if(PID == "1")
+        {
+            // Doge
+            Instantiate(Doge);
+        }
+        else if(PID == "2")
+        {
+            // Cate
+            Instantiate(Cate);
+        }
     }
 }
