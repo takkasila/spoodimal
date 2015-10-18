@@ -18,11 +18,11 @@ public class PetData : MonoBehaviour {
     [HideInInspector]
     public string petName, startDate;
     [HideInInspector]
-    public double petWeight;
+    public static double petWeight;
     [HideInInspector]
-    public int petFood;
+    public static int petFood;
     [HideInInspector]
-    public double petTotalTime;
+    public static double petTotalTime;
 
     bool firstScene = true;
 
