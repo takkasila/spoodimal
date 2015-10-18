@@ -70,11 +70,12 @@ public class PlayDatabase : MonoBehaviour {
 			PET_FOOD = int.Parse(removeDoubleQuote(jsonData.GetValue("PET_FOOD").ToString()));
 			PET_TOTALTIME = double.Parse(removeDoubleQuote(jsonData.GetValue("PET_TOTALTIME").ToString()));
 			print (removeDoubleQuote(jsonData.ToString()));
+
+            petData.getDatabase();
 		}
 		else if (valueType.Equals ("ERROR")) {
 			StartCoroutine(insertPetData());
 		}
-        petData.getDatabase();
 	}
 
 	IEnumerator insertPetData(){
@@ -84,6 +85,8 @@ public class PlayDatabase : MonoBehaviour {
 		form.AddField("PET_WEIGHT", PET_WEIGHT.ToString());
 		www2 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryInsertPetData.php",form);
 		yield return www2;
+
+        petData.getDatabase();
 	}
 
 	IEnumerator updatePetData(){
