@@ -37,19 +37,27 @@ public class PlayDatabase : MonoBehaviour {
 		StartCoroutine (checkPetData ());
 	}
 
-	void Update () {
-		if (PET_WEIGHT != PET_WEIGHT_Old || PET_FOOD != PET_FOOD_Old || PET_NAME != PET_NAME_Old) {
-			PET_WEIGHT_Old = PET_WEIGHT;
-			PET_FOOD_Old = PET_FOOD;
-			PET_NAME_Old = PET_NAME;
-			StartCoroutine (updatePetData ());
+    void OnApplicationQuit()
+    {
+        saveData();
+    }
 
-			while(!www3.isDone){
+    public void saveData()
+    {
+        if (PET_WEIGHT != PET_WEIGHT_Old || PET_FOOD != PET_FOOD_Old || PET_NAME != PET_NAME_Old)
+        {
+            PET_WEIGHT_Old = PET_WEIGHT;
+            PET_FOOD_Old = PET_FOOD;
+            PET_NAME_Old = PET_NAME;
+            StartCoroutine(updatePetData());
+
+            while (!www3.isDone)
+            {
                 // Should wait for some int second?
-			}
-			StopCoroutine(updatePetData());
-		}
-	}
+            }
+            StopCoroutine(updatePetData());
+        }
+    }
 
 	string removeDoubleQuote(string str){
 		return str.Trim( new Char[] { '"' });
