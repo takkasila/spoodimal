@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using Boomlagoon.JSON;
 
-public class play : MonoBehaviour {
+public class playDatabase : MonoBehaviour {
 
 	public Text inputPET_NAME;
 
