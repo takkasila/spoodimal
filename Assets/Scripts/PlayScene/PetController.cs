@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PetController : MonoBehaviour{
 
+    public PetAnimationController animationController;
     public int foodToGrow = 10;
     public float baseWeight = 10;
     public float maxWeight = 20;
@@ -21,7 +22,7 @@ public class PetController : MonoBehaviour{
         rb.centerOfMass = centerOfMass.localPosition;
         forcePoint = transform.FindChild("ForcePoint");
 
-        // For tasting
+        // For testing
         //PetData.petFood = 0;
         //PetData.petTotalTime = 0;
 	}
@@ -59,5 +60,6 @@ public class PetController : MonoBehaviour{
     public void gotFood(int foodValue)
     {
         PetData.petFood++;
+        animationController.PlayEatFood(foodValue);
     }
 }

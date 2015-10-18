@@ -8,10 +8,18 @@ public class PetData : MonoBehaviour {
     public InputField text_name;
     public Text text_weight_output;
     public Text text_totalTime_output;
+    public Text text_food_output;
     public PlayDatabase petDatabase;
 
+    public GameObject FoodUIParent;
+
     public GameObject Doge;
+    public GameObject DogeFood1;
+    public GameObject DogeFood2;
+
     public GameObject Cate;
+    public GameObject CateFood1;
+    public GameObject CateFood2;
 
     [HideInInspector]
     public string UID, PID;
@@ -46,6 +54,7 @@ public class PetData : MonoBehaviour {
         text_totalTime_output.text = ((int)petTotalTime).ToString() + " sec";
 
         petDatabase.PET_FOOD = petFood;
+        text_food_output.text = petFood.ToString();
 	}
 
     void EndEditName(InputField input)
@@ -67,16 +76,34 @@ public class PetData : MonoBehaviour {
         text_name.text = petName;
         text_weight_output.text = petWeight.ToString("F1");
         text_totalTime_output.text = ((int)petTotalTime).ToString();
+        text_food_output.text = petFood.ToString();
 
+        // Doge
         if(PID == "1")
         {
-            // Doge
             Instantiate(Doge);
+            
+            var food = Instantiate(DogeFood1);
+            food.transform.parent = FoodUIParent.transform;
+            // Have to fix value cause unity world space not compatible with RectTransform
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 3.46f, 0);
+
+            food = Instantiate(DogeFood2);
+            food.transform.parent = FoodUIParent.transform;
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.84f, 2.35f, 0);
         }
+        // Cate
         else if(PID == "2")
         {
-            // Cate
             Instantiate(Cate);
+
+            var food = Instantiate(CateFood1);
+            food.transform.parent = FoodUIParent.transform;
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 3.46f, 0);
+
+            food = Instantiate(CateFood2);
+            food.transform.parent = FoodUIParent.transform;
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 3.46f, 0);
         }
     }
 }

@@ -9,6 +9,10 @@ public class DragHandler : MonoBehaviour,  IBeginDragHandler, IDragHandler, IEnd
     public static GameObject itemBeingDragged;
     Vector3 startPos;
 
+    void Start()
+    {
+        RectTransform r = gameObject.GetComponent<RectTransform>();
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         itemBeingDragged = gameObject;
