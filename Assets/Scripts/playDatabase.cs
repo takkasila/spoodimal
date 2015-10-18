@@ -6,8 +6,6 @@ using Boomlagoon.JSON;
 
 public class playDatabase : MonoBehaviour {
 
-	public Text inputPET_NAME;
-
     // Can be get, push
     // UID, PID
     // PET_NAME, START_DATE
@@ -17,10 +15,13 @@ public class playDatabase : MonoBehaviour {
 
     [HideInInspector]
     public string UID, PID, PET_NAME, START_DATE;
-	private string PET_NAME_Old;
+    private string PET_NAME_Old;
 
+    [HideInInspector]
     public double PET_WEIGHT, PET_TOTALTIME;
 	private double PET_WEIGHT_Old;
+
+    [HideInInspector]
     public int PET_FOOD;
 	private int PET_FOOD_Old;
 
