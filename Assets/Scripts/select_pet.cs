@@ -25,6 +25,7 @@ public class select_pet : MonoBehaviour {
 			if (petName == "Doge") {
 				PID = "1";
 			} else if (petName == "Cate") {
+                Debug.Log("I send Cate!");
 				PID = "2";
 			}
 			StartCoroutine (goPlay ());
@@ -52,10 +53,6 @@ public class select_pet : MonoBehaviour {
 		form.AddField("PID", PID);
 		www = new WWW(URL+"queryInsertPlayer.php",form);
 		yield return www;
-	}
-
-	public void clickBack(){
-		Application.LoadLevel ("login");
 	}
 
 	IEnumerator checkInternet(){
