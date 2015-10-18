@@ -11,10 +11,6 @@ public class NameChange : MonoBehaviour {
 	}
 
 	void Update () {
-        if (inputField.isFocused)
-            textFieldImg.enabled = true;
-        else
-            textFieldImg.enabled = false;
-	
+        textFieldImg.enabled = inputField.isFocused;
 	}
 }

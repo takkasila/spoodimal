@@ -8,7 +8,7 @@ public class PetData : MonoBehaviour {
     public InputField text_name;
     public Text text_weight_output;
     public Text text_totalTime_output;
-    public playDatabase petDatabase;
+    public PlayDatabase petDatabase;
 
     [HideInInspector]
     public string UID, PID;
@@ -21,7 +21,31 @@ public class PetData : MonoBehaviour {
     [HideInInspector]
     public double petTotalTime;
 
+    bool firstScene = true;
+
     void Start () {
+
+        //Adding end name edit listener
+        text_name.onEndEdit.AddListener(
+            delegate
+            {
+                EndEditName(text_name);
+            }
+        );
+	}
+
+	void Update () {
+	}
+
+    void EndEditName(InputField input)
+    {
+        Debug.Log("Yo it's working");
+        petDatabase.PET_NAME = petName = input.text;
+    }
+
+    // call upon database finished receive data 
+    public void getDatabase()
+    {
         UID = petDatabase.UID;
         PID = petDatabase.UID;
         petName = petDatabase.PET_NAME;
@@ -33,9 +57,5 @@ public class PetData : MonoBehaviour {
         text_name.text = petName;
         text_weight_output.text = petWeight.ToString("F1");
         text_totalTime_output.text = ((int)petTotalTime).ToString();
-	}
-	
-	void Update () {
-	    
-	}
+    }
 }

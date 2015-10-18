@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using Boomlagoon.JSON;
 
-public class playDatabase : MonoBehaviour {
+public class PlayDatabase : MonoBehaviour {
 
     // Can be get, push
     // UID, PID
@@ -12,6 +12,8 @@ public class playDatabase : MonoBehaviour {
     // PET_WEIGHT
     // PET_FOOD
     // PET_TOTALTIME
+
+    public PetData petData;
 
     [HideInInspector]
     public string UID, PID, PET_NAME, START_DATE;
@@ -72,6 +74,7 @@ public class playDatabase : MonoBehaviour {
 		else if (valueType.Equals ("ERROR")) {
 			StartCoroutine(insertPetData());
 		}
+        petData.getDatabase();
 	}
 
 	IEnumerator insertPetData(){
@@ -92,6 +95,5 @@ public class playDatabase : MonoBehaviour {
 		form.AddField("PET_TOTALTIME", PET_TOTALTIME.ToString());
 		www3 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryUpdatePetData.php",form);
 		yield return www3;
-
 	}
 }
