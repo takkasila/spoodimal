@@ -5,35 +5,46 @@ using UnityEngine.UI;
 using Boomlagoon.JSON;
 
 public class play : MonoBehaviour {
+
 	public Text inputPET_NAME;
-	public string UID,PID,PET_NAME,PET_NAME_Old,START_DATE,UPDATE_DATE;
-	public double PET_WEIGHT,PET_WEIGHT_Old,PET_TOTALTIME;
-	public int PET_FOOD,PET_FOOD_Old;
+
+    // Can be get, push
+    // UID, PID
+    // PET_NAME, START_DATE
+    // PET_WEIGHT
+    // PET_FOOD
+    // PET_TOTALTIME
+
+    [HideInInspector]
+    public string UID, PID, PET_NAME, START_DATE;
+	private string PET_NAME_Old;
+
+    public double PET_WEIGHT, PET_TOTALTIME;
+	private double PET_WEIGHT_Old;
+    public int PET_FOOD;
+	private int PET_FOOD_Old;
+
+    // Calling URLs
 	private WWW www,www2,www3;
 	
-	// Use this for initialization
 	void Start () {
 		PET_NAME = "";
 		UID = PlayerPrefs.GetString("UID");
 		StartCoroutine (checkPetData ());
 	}
 
-	// Update is called once per frame
 	void Update () {
 		if (PET_WEIGHT != PET_WEIGHT_Old || PET_FOOD != PET_FOOD_Old || PET_NAME != PET_NAME_Old) {
 			PET_WEIGHT_Old = PET_WEIGHT;
 			PET_FOOD_Old = PET_FOOD;
 			PET_NAME_Old = PET_NAME;
 			StartCoroutine (updatePetData ());
-			while(!www3.isDone){
 
+			while(!www3.isDone){
+                // Should wait for some int second?
 			}
 			StopCoroutine(updatePetData());
 		}
-	}
-
-	void updatePetName(){
-		PET_NAME = inputPET_NAME.text;
 	}
 
 	string removeDoubleQuote(string str){
