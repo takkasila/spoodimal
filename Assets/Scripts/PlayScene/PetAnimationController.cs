@@ -7,6 +7,7 @@ public class PetAnimationController : MonoBehaviour {
     float intervalSleep_counter = 0;
     public float intervalToHungry = 14;
     float intervalHungry_counter = 0;
+    SoundController sound;
 
     bool doNothing = true;
     Animator anim;
@@ -15,6 +16,7 @@ public class PetAnimationController : MonoBehaviour {
 
 	void Start () {
         anim = GetComponent<Animator>();
+        sound = GameObject.Find("Sound").GetComponent<SoundController>();
 	}
 	
 	void Update () {
@@ -50,6 +52,7 @@ public class PetAnimationController : MonoBehaviour {
         {
             intervalHungry_counter = 0;
             anim.SetBool("hungry", true);
+            sound.playHungry();
         }
     }
 
@@ -73,6 +76,8 @@ public class PetAnimationController : MonoBehaviour {
 
         intervalHungry_counter = 0;
         doNothing = false;
+
+        sound.playFeed();
     }
 
     public void PlayHeadHitWall()
@@ -80,11 +85,12 @@ public class PetAnimationController : MonoBehaviour {
         anim.SetBool("hitWall", true);
 
         doNothing = false;
+        sound.playHitWall();
     }
 
     void OnMouseDown()
     {
-        switch(Random.Range(1, 2))
+        switch(Random.Range(1, 3))
         {
             case 1:
                 anim.SetBool("reac1", true);
@@ -95,6 +101,7 @@ public class PetAnimationController : MonoBehaviour {
         }
 
         doNothing = false;
+        sound.playClick();
     }
 
     void PlaySleep()
