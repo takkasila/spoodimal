@@ -103,7 +103,7 @@ public class PetData : MonoBehaviour {
 
             food = Instantiate(CateFood2);
             food.transform.parent = FoodUIParent.transform;
-            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 3.46f, 0);
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 2.35f, 0);
         }
     }
 }
