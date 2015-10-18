@@ -33,6 +33,7 @@ public class PlayDatabase : MonoBehaviour {
 	void Start () {
 		PET_NAME = "";
 		UID = PlayerPrefs.GetString("UID");
+		PID = PlayerPrefs.GetString("PID");
 		StartCoroutine (checkPetData ());
 	}
 

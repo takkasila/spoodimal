@@ -44,6 +44,7 @@ public class select_pet : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		StopCoroutine(insertPlayer());
 		PlayerPrefs.SetString("UID", UID);
+		PlayerPrefs.SetString("PID", PID);
 		Application.LoadLevel ("gamePlay");
 	}
 
