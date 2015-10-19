@@ -35,7 +35,9 @@ public class PetData : MonoBehaviour {
     bool firstScene = true;
 
     void Start () {
-
+		petFood = 0;
+		petWeight = 0;
+		petTotalTime = 0;
         //Adding end name edit listener
         text_name.onEndEdit.AddListener(
             delegate

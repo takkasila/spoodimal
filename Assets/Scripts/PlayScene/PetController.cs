@@ -44,7 +44,7 @@ public class PetController : MonoBehaviour{
             + Mathf.Clamp(weightPerGrow * (int)(PetData.petFood / foodToGrow)
             , 0, maxWeight - baseWeight);
 
-        PetData.petTotalTime += weightPerGrow * (int)(PetData.petTotalTime / secToGrow);
+//        PetData.petTotalTime += weightPerGrow * (int)(PetData.petTotalTime / secToGrow);
 
         float percentWeight = ((float)PetData.petWeight - baseWeight) / (maxWeight - baseWeight);
         float scale = minScale + percentWeight * (maxScale - minScale);

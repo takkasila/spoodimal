@@ -32,6 +32,9 @@ public class PlayDatabase : MonoBehaviour {
 	
 	void Start () {
 		PET_NAME = "";
+		PET_WEIGHT = 0;
+		PET_TOTALTIME = 0;
+		PET_FOOD = 0;
 		UID = PlayerPrefs.GetString("UID");
 		PID = PlayerPrefs.GetString("PID");
 		StartCoroutine (checkPetData ());
