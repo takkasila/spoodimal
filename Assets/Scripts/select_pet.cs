@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class select_pet : MonoBehaviour {
     public CurrentSelectPet currentPetScript;
-	private string UID,PID,URL = "http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/";
+	private string UID,PID,PYID,URL = "http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/";
 	private WWW www,www2;
 	public Text msgError;
 
@@ -43,7 +43,8 @@ public class select_pet : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(0.1f);
 		StopCoroutine(insertPlayer());
-		PlayerPrefs.SetString("UID", UID);
+		PlayerPrefs.SetString("PYID", PYID);
+//		PlayerPrefs.SetString("UID", UID);
 		PlayerPrefs.SetString("PID", PID);
 		Application.LoadLevel ("gamePlay");
 	}
@@ -52,8 +53,9 @@ public class select_pet : MonoBehaviour {
 		WWWForm form = new WWWForm();
 		form.AddField("UID", UID);
 		form.AddField("PID", PID);
-		www = new WWW(URL+"queryInsertPlayer.php",form);
+		www = new WWW(URL+"queryCheckPlayer.php",form);
 		yield return www;
+		PYID = www.text;
 	}
 
 	IEnumerator checkInternet(){

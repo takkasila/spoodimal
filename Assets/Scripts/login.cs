@@ -9,7 +9,7 @@ public class login : MonoBehaviour {
     public InputField password;
 	private string UID,URL = "http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/";
 	private bool loginSuccess = false,resultCheckSelectPet = false;
-	private WWW www,www2,www3;
+	private WWW www,www3;
 
 	public void clickPlay (){
 		StartCoroutine(checkInternet());
@@ -35,19 +35,14 @@ public class login : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		StopCoroutine(checkLogin());
 		if (loginSuccess) {
-			StartCoroutine(checkSelectPet());
-			while(!www2.isDone){
-
-			}
-			yield return new WaitForSeconds(0.1f);
-			StopCoroutine(checkSelectPet());
+//			StartCoroutine(checkSelectPet());
+//			while(!www2.isDone){
+//
+//			}
+//			yield return new WaitForSeconds(0.1f);
+//			StopCoroutine(checkSelectPet());
 			PlayerPrefs.SetString("UID", UID);
-			if(resultCheckSelectPet){
-				Application.LoadLevel ("gameplay");
-			}
-			else{
-				Application.LoadLevel ("menu");
-			}
+			Application.LoadLevel ("menu");
 		}
 	}
 
@@ -78,21 +73,21 @@ public class login : MonoBehaviour {
 		}
 	}
 
-	IEnumerator checkSelectPet(){
-		WWWForm form = new WWWForm();
-		form.AddField("UID", UID);
-		www2 = new WWW(URL+"queryCheckSelectPet.php",form);
-		yield return www2;
-		string result = removeDoubleQuote(www2.text);
-		if(result.Equals("not_selected")){
-			resultCheckSelectPet = false;
-		}
-		else if(result.Equals("selected")){
-			resultCheckSelectPet = true;
-		}
-		Debug.Log(www2.text);
-		print (resultCheckSelectPet);
-	}
+//	IEnumerator checkSelectPet(){
+//		WWWForm form = new WWWForm();
+//		form.AddField("UID", UID);
+//		www2 = new WWW(URL+"queryCheckSelectPet.php",form);
+//		yield return www2;
+//		string result = removeDoubleQuote(www2.text);
+//		if(result.Equals("not_selected")){
+//			resultCheckSelectPet = false;
+//		}
+//		else if(result.Equals("selected")){
+//			resultCheckSelectPet = true;
+//		}
+//		Debug.Log(www2.text);
+//		print (resultCheckSelectPet);
+//	}
 
 	IEnumerator checkInternet(){
 		www3 = new WWW("https://www.google.co.th");

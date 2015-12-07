@@ -22,7 +22,7 @@ public class PetData : MonoBehaviour {
     public GameObject CateFood2;
 
     [HideInInspector]
-    public string UID, PID;
+    public string PYID, PID;
     [HideInInspector]
     public string petName, startDate;
     [HideInInspector]
@@ -67,7 +67,7 @@ public class PetData : MonoBehaviour {
     // call upon database finished receive data 
     public void getDatabase()
     {
-        UID = petDatabase.UID;
+        PYID = petDatabase.PYID;
         PID = petDatabase.PID;
         petName = petDatabase.PET_NAME;
         startDate = petDatabase.START_DATE;

@@ -16,7 +16,7 @@ public class PlayDatabase : MonoBehaviour {
     public PetData petData;
 
     [HideInInspector]
-    public string UID, PID, PET_NAME, START_DATE;
+    public string PYID, PID, PET_NAME, START_DATE;
     private string PET_NAME_Old;
 
     [HideInInspector]
@@ -35,7 +35,7 @@ public class PlayDatabase : MonoBehaviour {
 		PET_WEIGHT = 0;
 		PET_TOTALTIME = 0;
 		PET_FOOD = 0;
-		UID = PlayerPrefs.GetString("UID");
+		PYID = PlayerPrefs.GetString("PYID");
 		PID = PlayerPrefs.GetString("PID");
 		StartCoroutine (checkPetData ());
 	}
@@ -68,7 +68,7 @@ public class PlayDatabase : MonoBehaviour {
 
 	IEnumerator checkPetData(){
 		WWWForm form = new WWWForm();
-		form.AddField("UID", UID);
+		form.AddField("PYID", PYID);
 		www = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryCheckPetData.php",form);
 		yield return www;
 		JSONObject jsonObject = JSONObject.Parse(www.text);
@@ -92,7 +92,7 @@ public class PlayDatabase : MonoBehaviour {
 
 	IEnumerator insertPetData(){
 		WWWForm form = new WWWForm();
-		form.AddField("UID", UID);
+		form.AddField("PYID", PYID);
 		form.AddField("PET_NAME", PET_NAME);
 		form.AddField("PET_WEIGHT", PET_WEIGHT.ToString());
 		www2 = new WWW("http://www.zp9039.tld.122.155.167.199.no-domain.name/spoodiman/queryInsertPetData.php",form);
@@ -103,7 +103,7 @@ public class PlayDatabase : MonoBehaviour {
 
 	IEnumerator updatePetData(){
 		WWWForm form = new WWWForm();
-		form.AddField("UID", UID);
+		form.AddField("PYID", PYID);
 		form.AddField("PET_NAME", PET_NAME);
 		form.AddField("PET_WEIGHT", PET_WEIGHT.ToString());
 		form.AddField("PET_FOOD", PET_FOOD.ToString());
