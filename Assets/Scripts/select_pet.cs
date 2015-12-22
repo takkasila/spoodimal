@@ -14,6 +14,7 @@ public class select_pet : MonoBehaviour {
 
     // Doge = 1
     // Cate = 2
+    // Pony = 3
 	public void clickPet(){
         string petName = currentPetScript.getCurrentPetName();
 		StartCoroutine(checkInternet());
@@ -28,6 +29,10 @@ public class select_pet : MonoBehaviour {
                 Debug.Log("I send Cate!");
 				PID = "2";
 			}
+            else if(petName == "Pony"){
+                Debug.Log("I send Pony!");
+                PID = "3";
+            }
 			StartCoroutine (goPlay ());
 		} 
 		else {

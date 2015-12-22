@@ -21,6 +21,10 @@ public class PetData : MonoBehaviour {
     public GameObject CateFood1;
     public GameObject CateFood2;
 
+    public GameObject Pony;
+    public GameObject PonyFood1;
+    public GameObject PonyFood2;
+
     [HideInInspector]
     public string PYID, PID;
     [HideInInspector]
@@ -95,7 +99,7 @@ public class PetData : MonoBehaviour {
             food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.84f, 2.35f, 0);
         }
         // Cate
-        else if(PID == "2")
+        else if (PID == "2")
         {
             Instantiate(Cate);
 
@@ -104,6 +108,19 @@ public class PetData : MonoBehaviour {
             food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 3.46f, 0);
 
             food = Instantiate(CateFood2);
+            food.transform.parent = FoodUIParent.transform;
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 2.35f, 0);
+        }
+        // Pony
+        else if (PID == "3")
+        {
+            Instantiate(Pony);
+
+            var food = Instantiate(PonyFood1);
+            food.transform.parent = FoodUIParent.transform;
+            food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 3.46f, 0);
+
+            food = Instantiate(PonyFood2);
             food.transform.parent = FoodUIParent.transform;
             food.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-0.86f, 2.35f, 0);
         }
