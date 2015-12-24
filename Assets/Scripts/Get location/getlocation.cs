@@ -67,6 +67,7 @@ public class getlocation : MonoBehaviour {
 	
 	IEnumerator GetItemCatelogResponse(GetItemCatelogReceiver _GetItemCatelogReceiver)
 	{
+        Debug.Log("Lat, Long: " + Input.location.lastData.latitude+ "" + Input.location.lastData.longitude);
 		string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + Input.location.lastData.latitude  + "&lon=" + Input.location.lastData.longitude + "&APPID=95306e9f0721ee115aeb609673b7d30e";
 		WWW www = new WWW(url);
 		yield return www; 
@@ -93,7 +94,7 @@ public class getlocation : MonoBehaviour {
 
         //Debug.Log (lon);
         //Debug.Log (lat);
-        //Debug.Log(w_main); // Require one
+        Debug.Log(w_main); // Require one
         //Debug.Log (w_desc);
         //Debug.Log (m_temp);
         //Debug.Log (m_pressure);

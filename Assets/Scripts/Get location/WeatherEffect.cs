@@ -27,12 +27,19 @@ public class WeatherEffect : MonoBehaviour {
         }
     }
 
+    // Clouds
     // Rain
     // Sunny    // Default case
     void SpawnWeather()
     {
         switch(getlocationguy.weather)
         {
+            case "Clouds":
+                BGSprite.sprite = rainyBG;
+                ExtraSoundBG.clip = rainingSoundBG;
+                ExtraSoundBG.Play();
+                break;
+
             case "Rain":
                 BGSprite.sprite = rainyBG;
                 Instantiate(rainingEffect);
