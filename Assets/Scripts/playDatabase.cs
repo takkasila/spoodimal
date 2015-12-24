@@ -81,7 +81,7 @@ public class PlayDatabase : MonoBehaviour {
 			PET_WEIGHT = double.Parse(removeDoubleQuote(jsonData.GetValue("PET_WEIGHT").ToString()));
 			PET_FOOD = int.Parse(removeDoubleQuote(jsonData.GetValue("PET_FOOD").ToString()));
 			PET_TOTALTIME = double.Parse(removeDoubleQuote(jsonData.GetValue("PET_TOTALTIME").ToString()));
-			print (removeDoubleQuote(jsonData.ToString()));
+            //print (removeDoubleQuote(jsonData.ToString()));
 
             petData.getDatabase();
 		}
