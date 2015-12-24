@@ -19,9 +19,7 @@ public class getlocation : MonoBehaviour {
 	{
 		// First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
-            print("GPS NOT AVAILABLE");
-		//outputText1.text = "GPS not available";
-		yield break;
+		    yield break;
 		
 		// Start service before querying location
 		Input.location.Start();
