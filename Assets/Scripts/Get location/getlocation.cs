@@ -18,8 +18,8 @@ public class getlocation : MonoBehaviour {
 	IEnumerator StartLocation()
 	{
 		// First, check if user has location service enabled
-        //if (!Input.location.isEnabledByUser)
-            //print("GPS NOT AVAILABLE");
+        if (!Input.location.isEnabledByUser)
+            print("GPS NOT AVAILABLE");
 		//outputText1.text = "GPS not available";
 		yield break;
 		
