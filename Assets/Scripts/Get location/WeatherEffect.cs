@@ -32,7 +32,7 @@ public class WeatherEffect : MonoBehaviour {
     // Sunny    // Default case
     void SpawnWeather()
     {
-        switch(getlocationguy.weather)
+        switch (getlocationguy.weather)
         {
             case "Clouds":
                 BGSprite.sprite = rainyBG;
